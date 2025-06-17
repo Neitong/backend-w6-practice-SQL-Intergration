@@ -23,7 +23,7 @@ export default function ArticleList() {
       const data = await getArticles();
       setArticles(data);
     } catch (err) {
-      setError("Failed to load articles. Please try again.");
+      setError( (err.message || "") + `Failed to fetch article. `);
     } finally {
       setIsLoading(false);
     }
@@ -36,8 +36,7 @@ export default function ArticleList() {
       await removeArticle(id);
       await fetchArticles(); // refresh the list
     } catch (err) {
-      setError("Failed to delete article.");
-    } finally {
+      setError( (err.message || "") + `Failed to fetch article. `);
       setIsLoading(false);
     }
   };

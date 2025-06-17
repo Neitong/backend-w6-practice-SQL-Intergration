@@ -27,7 +27,7 @@ export default function ArticlePage() {
         setError("Article not found.");
       }
     } catch (err) {
-      setError("Failed to fetch article.");
+      setError( (err.message || "") + `Failed to fetch article. `);
     } finally {
       setLoading(false);
     }

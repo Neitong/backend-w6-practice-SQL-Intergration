@@ -29,7 +29,7 @@ export default function ArticleForm({ isEdit }) {
       const article = await getArticleById(id);
       setFormData(article);
     } catch (err) {
-      setError("Failed to load article. Please try again.");
+      setError( (err.message || "") + `Failed to fetch article. `);
     } finally {
       setIsLoading(false);
     }
@@ -52,7 +52,7 @@ export default function ArticleForm({ isEdit }) {
       }
       navigate("/articles");
     } catch (err) {
-      setError("Failed to submit article.");
+      setError( (err.message || "") + `Failed to fetch article. `);
     } finally {
       setIsLoading(false);
     }
