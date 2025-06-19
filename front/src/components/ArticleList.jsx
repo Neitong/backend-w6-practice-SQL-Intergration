@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { getArticles, removeArticle } from "../services/api";
-
 //
 // ArticleList component
 //
@@ -66,10 +65,19 @@ export default function ArticleList() {
 }
 
 function ArticleCard({ article, onView, onEdit, onDelete }) {
+    
+
+
   return (
     <div className="article-card">
       <div className="article-title">{article.title}</div>
-      <div className="article-author">By {article.journalist}</div>
+      <div className="article-author">
+        By: <Link to={`/journalists/${article.journalist}/articles`}
+          className="author-link"
+        >
+          {article.journalist}
+        </Link>
+      </div>
 
       <div className="article-actions">
         <button className="button-tertiary" onClick={() => onEdit(article.id)}>

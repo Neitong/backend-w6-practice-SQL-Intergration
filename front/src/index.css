@@ -204,3 +204,70 @@ button:hover {
   color: white;
   border-color: var(--main-color-light);
 }
+
+/*  ----------  JOURNALIST PAGE  --------------------- */
+
+.journalist-name {
+    display: inline-block;
+    margin-top: 8px;
+    font-style: italic;
+}
+
+.journalist-name:hover {
+    text-decoration: underline;
+}
+
+.journalist-articles {
+    padding: 20px;
+}
+
+.articles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.article-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    margin-bottom: 10px;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    background-color: white;
+}
+
+.article-info h3 {
+    margin: 0;
+    margin-bottom: 5px;
+}
+
+.article-info p {
+    margin: 0;
+    color: #666;
+}
+
+.view-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.view-btn:hover {
+    background-color: #0056b3;
+}
+
+.author-link {
+    color: #007bff;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.author-link:hover {
+    text-decoration: underline;
+}

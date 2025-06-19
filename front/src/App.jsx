@@ -9,6 +9,7 @@ import {
 import ArticleList from "./components/ArticleList";
 import ArticleForm from "./components/ArticleForm";
 import ArticlePage from "./components/ArticlePage";
+import JournalistPage from "./components/JournalistPage";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
         <Route path="/" element={<Navigate to="/articles" />} />
         <Route path="/articles" element={<ArticleList />} />
         <Route path="/articles/add" element={<ArticleForm isEdit={false} />} />
+        <Route path="journalists/:id/articles" element={<JournalistPage />} />
         <Route
           path="/articles/:id/edit"
           element={<ArticleForm isEdit={true} />}

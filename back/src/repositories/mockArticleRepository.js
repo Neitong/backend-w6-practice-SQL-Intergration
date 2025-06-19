@@ -16,7 +16,7 @@ let articles = [
 ];
 
 // Helper to simulate async delay (optional)
-function delay(ms = 100) {
+export function delay(ms = 100) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 

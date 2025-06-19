@@ -3,26 +3,37 @@
 //  - Connect to the database (using the pool provided by the database.js)
 // -  Perfrom the SQL querries to implement the bellow API
 //
-import  { connection } from "../utils/database.js";
+import  { pool } from "../utils/database.js";
+
+async function delay(ms = 100) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
 
 // Get all articles
 export async function getArticles() {
     // TODO
-    const [rows] = await connection.query("SELECT * FROM articles");
+    await delay();
+    const [rows] = await pool.query(`
+        SELECT articles.*, journalists.name AS journalist_name
+        FROM articles
+        LEFT JOIN journalists ON articles.journalist_id = journalists.id
+    `);
     return rows;
 }
 
 // Get one article by ID
 export async function getArticleById(id) {
     // TODO
-    const [rows] = await connection.query("SELECT * FROM articles WHERE id = ?", [id]);
+    await delay();
+    const [rows] = await pool.query("SELECT * FROM articles WHERE id = ?", [id]);
     return rows.length > 0 ? rows[0] : null;
 }
 
 // Create a new article
 export async function createArticle(article) {
     // TODO
-    const [result] = await connection.query(
+    await delay();
+    const [result] = await pool.query(
         "INSERT INTO articles (title, content, journalist, category) VALUES (?, ?, ?, ?)",
         [
             article.title,
@@ -37,7 +48,8 @@ export async function createArticle(article) {
 // Update an article by ID
 export async function updateArticle(id, updatedData) {
     // TODO
-    const [result] = await connection.query(
+    await delay();
+    const [result] = await pool.query(
         "UPDATE articles SET title = ?, content = ?, journalist = ?, category = ? WHERE id = ?",
         [
             updatedData.title,
@@ -58,7 +70,8 @@ export async function updateArticle(id, updatedData) {
 // Delete an article by ID
 export async function deleteArticle(id) {
     // TODO
-    const [result] = await connection.query(
+    await delay();
+    const [result] = await pool.query(
         "UPDATE articles SET deleted = 1 WHERE id = ?",
         [id]
     );
@@ -66,4 +79,20 @@ export async function deleteArticle(id) {
     if (result.affectedRows === 0) throw new Error("Article not found or already deleted");
 
     return result;
+}
+
+export async function getJournalists(){
+    await delay();
+    const [rows] = await pool.query("SELECT * FROM journalists");
+}
+
+export async function getJournalistArticles(journalistId) {
+    await delay();
+    const [rows] = await pool.query(
+        'SELECT articles.*, journalists.name as journalist_name FROM articles ' +
+        'JOIN journalists ON articles.journalist_id = journalists.id ' +
+        'WHERE journalists.id = ?',
+        [journalistId]
+    );
+    return rows;
 }
